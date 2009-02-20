@@ -7,8 +7,7 @@ module SuidBit
     end
 
     module ClassMethods
-      def has_relational_scope(relation, *args)
-        options = args.is_a?(Hash) ? args.pop : {}
+      def has_relational_scope(relation, options = {})
         klass = (options[:class_name] ? options[:class_name] : relation).to_s.classify.constantize
         prefix = options[:prefix] || relation.to_s
 
