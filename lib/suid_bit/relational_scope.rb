@@ -8,7 +8,7 @@ module SuidBit
 
     module ClassMethods
       def has_relational_scope(relation, options = {})
-        klass = (options[:class_name] ? options[:class_name] : relation).to_s.classify.constantize
+        klass = (options[:class_name] ? options[:class_name] : reflections[relation].class_name).to_s.classify.constantize
         prefix = (options[:prefix] || relation).to_s
 
         klass.scopes.keys.each do |scope|
@@ -25,7 +25,7 @@ module SuidBit
         # need to setup the includes to properly link
         case options[:include]
         when Hash, Array
-          options[:include] = [{relation => options[:include]}]
+          options[:include] = [{klass.table_name => options[:include]}]
         when NilClass
           options[:include] = [relation]
         end
