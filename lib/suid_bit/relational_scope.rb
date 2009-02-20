@@ -24,8 +24,8 @@ module SuidBit
 
         # need to setup the includes to properly link
         case options[:include]
-        when Hash, Array
-          options[:include] = [{klass.table_name => options[:include]}]
+        when Hash, Array, Symbol
+          options[:include] = [{relation => options[:include]}]
         when NilClass
           options[:include] = [relation]
         end
