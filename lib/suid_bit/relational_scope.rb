@@ -9,7 +9,7 @@ module SuidBit
     module ClassMethods
       def has_relational_scope(relation, options = {})
         klass = (options[:class_name] ? options[:class_name] : relation).to_s.classify.constantize
-        prefix = options[:prefix] || relation.to_s
+        prefix = (options[:prefix] || relation).to_s
 
         klass.scopes.keys.each do |scope|
           named_scope "#{prefix}_#{scope}", lambda {|*args|
